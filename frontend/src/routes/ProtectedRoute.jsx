@@ -1,7 +1,7 @@
 import React from "react";
 import { Redirect, Route } from "react-router-dom";
 
-const isAuth = true;
+const isAuth = false;
 const user = {
   activated: false,
 };

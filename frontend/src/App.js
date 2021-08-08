@@ -9,8 +9,6 @@ import ProtectedRoute from "./routes/ProtectedRoute";
 // Pages Component
 import Home from "./pages/Home/Home";
 import Navigation from "./components/shared/Navigation/Navigation";
-import Register from "./pages/Register/Register";
-import Login from "./pages/Login/Login";
 import Activate from "./pages/Activate/Activate";
 import Authenticate from "./pages/Authenticate/Authenticate";
 import Rooms from "./pages/Rooms/Rooms";
@@ -32,12 +30,6 @@ function App() {
         <ProtectedRoute path="/rooms">
           <Rooms />
         </ProtectedRoute>
-        {/* <Route path="/register">
-          <Register />
-        </Route>
-        <Route path="/login">
-          <Login />
-        </Route> */}
       </Switch>
     </BrowserRouter>
   );
