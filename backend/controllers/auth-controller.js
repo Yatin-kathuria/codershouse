@@ -1,3 +1,4 @@
+const UserDto = require("../dtos/user-dtos");
 const hashService = require("../services/hash-service");
 const otpService = require("../services/otp-service");
 const tokenService = require("../services/token-service");
@@ -21,8 +22,8 @@ class AuthController {
 
     // send otp
     try {
-      await otpService.sendBySms(phone, otp);
-      res.json({ hash: `${hash}.${expires}`, phone });
+      // await otpService.sendBySms(phone, otp);
+      res.json({ hash: `${hash}.${expires}`, phone, otp });
     } catch (error) {
       console.log(err);
       res.status(500).json({ message: "message sending failed" });
@@ -70,8 +71,9 @@ class AuthController {
       maxAge: 1000 * 60 * 60 * 24 * 30,
       httpOnly: true,
     });
+    const userDto = new UserDto(user);
 
-    res.json({ accessToken });
+    res.json({ accessToken, user: userDto });
   }
 }
 
