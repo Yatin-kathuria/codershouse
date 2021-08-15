@@ -1,12 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Redirect, Route } from "react-router-dom";
 
-const isAuth = true;
-const user = {
-  activated: false,
-};
-
 function SemiProtectedRoute({ children, ...rest }) {
+  const { isAuth, user } = useSelector((state) => state.auth);
+
   return (
     <Route
       {...rest}
