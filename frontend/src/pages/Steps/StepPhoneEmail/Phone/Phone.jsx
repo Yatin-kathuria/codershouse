@@ -14,7 +14,7 @@ function Phone({ onNext }) {
   const submit = async () => {
     // server request
     const { data } = await sendOtp({ phone: phoneNumber });
-    dispatch(setOtp({ phone: data.phone, hash: data.hash }));
+    dispatch(setOtp({ phone: data.phone, hash: data.hash, otp: data.otp }));
     onNext();
   };
 

@@ -18,7 +18,7 @@ const StepPhoneEmail = ({ onNext }) => {
   };
 
   return (
-    <div className={styles.cardWrapper}>
+    <div className="cardWrapper">
       <div>
         <div className={styles.buttonWrapper}>
           <button

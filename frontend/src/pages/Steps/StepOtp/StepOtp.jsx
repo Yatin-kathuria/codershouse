@@ -9,7 +9,7 @@ import styles from "./StepOtp.module.css";
 
 const StepOtp = () => {
   const dispatch = useDispatch();
-  const { phone, hash } = useSelector((state) => state.auth.otp);
+  const { phone, hash, ...rest } = useSelector((state) => state.auth.otp);
 
   const [otp, setOtp] = useState("");
   async function submit() {
@@ -22,20 +22,21 @@ const StepOtp = () => {
   }
 
   return (
-    <>
-      <div className={styles.cardWrapper}>
-        <Card title="Enter the code we just texted you" icon="lock-emoji">
-          <TextInput value={otp} onChange={(e) => setOtp(e.target.value)} />
-          <div className={styles.actionButtonWrap}>
-            <Button onClick={submit} text="Next" />
-          </div>
-          <p className={styles.bottomParagraph}>
-            By entering your number, you’re agreeing to our Terms of Service and
-            Privacy Policy. Thanks!
-          </p>
-        </Card>
-      </div>
-    </>
+    <div className="cardWrapper">
+      <Card
+        title={`Enter the code we just texted you . Your OTP (${rest.otp})`}
+        icon="lock-emoji"
+      >
+        <TextInput value={otp} onChange={(e) => setOtp(e.target.value)} />
+        <div className={styles.actionButtonWrap}>
+          <Button onClick={submit} text="Next" />
+        </div>
+        <p className={styles.bottomParagraph}>
+          By entering your number, you’re agreeing to our Terms of Service and
+          Privacy Policy. Thanks!
+        </p>
+      </Card>
+    </div>
   );
 };
 
