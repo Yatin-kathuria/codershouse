@@ -1,0 +1,9 @@
+.paragraph {
+  width: 70%;
+  text-align: center;
+  margin: 20px auto;
+}
+
+.cardWrapper {
+  composes: cardWrapper from "../../../App.module.css";
+}
