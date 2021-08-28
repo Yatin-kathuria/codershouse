@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const refreshModal = require("../models/refresh-modal");
+const RefreshModal = require("../models/refresh-modal");
 const accessTokenSecret = process.env.JWT_ACCESS_TOKEN_SECRET;
 const refreshTokenSecret = process.env.JWT_REFRESH_TOKEN_SECRET;
 
@@ -16,7 +16,7 @@ class TokenService {
 
   async storeRefreshToken(token, userId) {
     try {
-      await refreshModal.create({
+      await RefreshModal.create({
         token,
         userId,
       });
@@ -27,6 +27,26 @@ class TokenService {
 
   async verifyAccessToken(token) {
     return jwt.verify(token, accessTokenSecret);
+  }
+
+  async verifyRefreshToken(refreshToken) {
+    return jwt.verify(refreshToken, refreshTokenSecret);
+  }
+
+  async findRefreshToken(userId, refreshToken) {
+    return await RefreshModal.findOne({
+      userId: userId,
+      token: refreshToken,
+    });
+  }
+
+  async updateRefreshToken(userId, refreshToken) {
+    return await RefreshModal.updateOne(
+      {
+        userId: userId,
+      },
+      { token: refreshToken }
+    );
   }
 }
 
