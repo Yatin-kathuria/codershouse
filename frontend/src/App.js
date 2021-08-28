@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./App.css";
 import { BrowserRouter, Switch } from "react-router-dom";
 
@@ -12,9 +13,15 @@ import Navigation from "./components/shared/Navigation/Navigation";
 import Activate from "./pages/Activate/Activate";
 import Authenticate from "./pages/Authenticate/Authenticate";
 import Rooms from "./pages/Rooms/Rooms";
+import { useLoadingWithRefresh } from "./hooks/useLoadingWithRefresh";
+import Loader from "./components/shared/Loader/Loader";
 
 function App() {
-  return (
+  const [loading] = useLoadingWithRefresh();
+
+  return loading ? (
+    <Loader message="Loading, please wait..." />
+  ) : (
     <BrowserRouter>
       <Navigation />
       <Switch>

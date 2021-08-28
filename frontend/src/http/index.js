@@ -16,6 +16,8 @@ export const verifyOtp = (data) => api.post("/api/verify-otp", data);
 
 export const activate = (data) => api.post("/api/activate", data);
 
+export const logout = () => api.post("/api/logout");
+
 // Interceptors
 api.interceptors.response.use(
   (config) => {

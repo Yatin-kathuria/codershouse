@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "../../../components/shared/button/Button";
 import Card from "../../../components/shared/card/Card";
+import Loader from "../../../components/shared/Loader/Loader";
 import { activate } from "../../../http";
 import { setAvatar } from "../../../store/activateSlice";
 import { setAuth } from "../../../store/authSlice";
@@ -9,10 +10,13 @@ import styles from "./StepAvatar.module.css";
 
 const StepAvatar = ({ onNext }) => {
   const dispatch = useDispatch();
-  const { avatar, name } = useSelector((state) => state.activate);
-  const [image, setImage] = useState(avatar);
+  const { name } = useSelector((state) => state.activate);
+  const [image, setImage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const submit = async () => {
+    if (!name || !image) return;
+    setLoading(true);
     try {
       const { data } = await activate({ name, image });
       if (data.auth) {
@@ -21,6 +25,8 @@ const StepAvatar = ({ onNext }) => {
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -34,12 +40,20 @@ const StepAvatar = ({ onNext }) => {
     };
   };
 
+  if (loading) {
+    return <Loader message="Activation in progress..." />;
+  }
+
   return (
     <div className="cardWrapper">
       <Card title={`okay, ${name}`} icon="monkey-emoji">
         <p className={styles.subHeading}>How's this photo?</p>
         <div className={styles.avatarWrapper}>
-          <img src={image} alt="avatar" className={styles.avatar} />
+          <img
+            src={image ? image : "/images/monkey-avatar.png"}
+            alt="avatar"
+            className={styles.avatar}
+          />
         </div>
         <div>
           <label htmlFor="avatarInput" className={styles.avatarLabel}>
