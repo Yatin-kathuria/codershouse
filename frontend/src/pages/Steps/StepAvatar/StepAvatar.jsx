@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "../../../components/shared/button/Button";
 import Card from "../../../components/shared/card/Card";
@@ -13,6 +13,13 @@ const StepAvatar = ({ onNext }) => {
   const { name } = useSelector((state) => state.activate);
   const [image, setImage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [unMounted, setUnMounted] = useState(false);
+
+  useEffect(() => {
+    return () => {
+      setUnMounted(true);
+    };
+  }, []);
 
   const submit = async () => {
     if (!name || !image) return;
@@ -20,7 +27,10 @@ const StepAvatar = ({ onNext }) => {
     try {
       const { data } = await activate({ name, image });
       if (data.auth) {
-        dispatch(setAuth(data));
+        // check
+        if (!unMounted) {
+          dispatch(setAuth(data));
+        }
         // onNext();
       }
     } catch (error) {

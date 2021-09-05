@@ -17,3 +17,23 @@
   display: flex;
   align-items: center;
 }
+
+.navRight {
+  display: flex;
+  align-items: center;
+}
+
+.logoutButton {
+  background: none;
+  cursor: pointer;
+}
+
+.avatar {
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #0077ff;
+  margin: 0 20px;
+  margin-right: 10px;
+  width: 40px;
+  height: 40px;
+}
