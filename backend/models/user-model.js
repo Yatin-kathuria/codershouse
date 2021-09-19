@@ -13,9 +13,18 @@ const userSchema = new Schema(
       default: false,
       required: false,
     },
-    avatar: { type: String, required: false },
+    avatar: {
+      type: String,
+      required: false,
+      get: (avatar) => {
+        if (avatar) {
+          return `${process.env.BASE_URL}${avatar}`;
+        }
+        return avatar;
+      },
+    },
   },
-  { timestamps: true }
+  { timestamps: true, toJSON: { getters: true } }
 );
 
 module.exports = mongoose.model("User", userSchema);
