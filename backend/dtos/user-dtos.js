@@ -1,5 +1,5 @@
 class UserDto {
-  _id;
+  id;
   phone;
   name;
   avatar;
@@ -7,7 +7,7 @@ class UserDto {
   activated;
 
   constructor(user) {
-    this._id = user._id;
+    this.id = user._id;
     this.phone = user.phone;
     this.activated = user.activated;
     this.createdAt = user.createdAt;

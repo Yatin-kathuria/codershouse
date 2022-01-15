@@ -101,6 +101,7 @@ io.on('connection', (socket) => {
   };
 
   socket.on(ACTIONS.LEAVE, leaveRoom);
+  socket.on('disconnecting', leaveRoom);
 });
 
 server.listen(PORT, () => {

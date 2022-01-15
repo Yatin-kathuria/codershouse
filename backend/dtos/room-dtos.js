@@ -1,5 +1,5 @@
 class RoomDto {
-  _id;
+  id;
   topic;
   roomType;
   speakers;
@@ -8,7 +8,7 @@ class RoomDto {
   activated;
 
   constructor(room) {
-    this._id = room._id;
+    this.id = room._id;
     this.topic = room.topic;
     this.roomType = room.roomType;
     this.ownerId = room.ownerId;

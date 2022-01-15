@@ -13,13 +13,13 @@ const Room = () => {
     <div>
       <h1>All Connected clients</h1>
       {clients.map((client) => (
-        <div key={client.id}>
+        <div key={client.id} className={styles.userHead}>
           <audio
-            src=''
             ref={(instance) => provideRef(instance, client.id)}
             controls
             autoPlay
-          ></audio>
+          />
+          <img src={client.avatar} alt='avatar' className={styles.userAvatar} />
           <h4>{client.name}</h4>
         </div>
       ))}
