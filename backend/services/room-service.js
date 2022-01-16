@@ -1,4 +1,4 @@
-const RoomModal = require("../models/room-modal");
+const RoomModal = require('../models/room-modal');
 
 class RoomService {
   async create({ topic, roomType, ownerId }) {
@@ -13,10 +13,15 @@ class RoomService {
 
   async getAllRooms(types) {
     const rooms = RoomModal.find({ roomType: { $in: types } })
-      .populate("speakers")
-      .populate("ownerId")
+      .populate('speakers')
+      .populate('ownerId')
       .exec();
     return rooms;
+  }
+
+  async getRoom(roomId) {
+    const room = RoomModal.findOne({ _id: roomId });
+    return room;
   }
 }
 
